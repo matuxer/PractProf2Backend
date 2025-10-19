@@ -1,0 +1,18 @@
+# Spring Boot Configuration Template
+# Copy this file to application.properties and configure your settings
+
+# Server Configuration
+server.port=8080
+
+# Database Configuration (example for H2)
+# spring.datasource.url=jdbc:h2:mem:testdb
+# spring.datasource.driver-class-name=org.h2.Driver
+# spring.datasource.username=sa
+# spring.datasource.password=
+
+# JPA Configuration
+# spring.jpa.hibernate.ddl-auto=update
+# spring.jpa.show-sql=true
+
+# Logging Configuration
+# logging.level.com.example.ferreteria=DEBUG
