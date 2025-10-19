@@ -1,2 +1,27 @@
-# This file ensures the resources directory is tracked by Git
-# You can delete this file once you add other configuration files
+# =============================================================================
+# .gitkeep - Mantiene esta carpeta en el repositorio
+# =============================================================================
+#
+# Este archivo existe para que Git incluya la carpeta src/main/resources/ 
+# en el repositorio, incluso cuando está vacía.
+#
+# ¿Por qué es necesario?
+# - Git no trackea carpetas vacías, solo archivos
+# - Esta carpeta es importante para la estructura de Maven/Spring Boot
+# - Sin este archivo, la carpeta resources/ no existiría al clonar el repo
+# - Otros desarrolladores tendrían errores al compilar
+#
+# ARCHIVOS QUE VAN EN ESTA CARPETA:
+# ✅ application.properties (configuración principal - NO se sube al repo)
+# ✅ application.properties.template (plantilla de configuración)
+# ✅ static/ (archivos estáticos como CSS, JS, imágenes)
+# ✅ templates/ (plantillas HTML si usas Thymeleaf)
+# ✅ data.sql (datos de ejemplo para cargar al inicio)
+# ✅ schema.sql (estructura de BD personalizada)
+#
+# IMPORTANTE: 
+# - NO borres este archivo
+# - application.properties está en .gitignore por seguridad
+# - Usa application.properties.template como base para tu configuración
+#
+# =============================================================================
