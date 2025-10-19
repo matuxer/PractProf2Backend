@@ -36,4 +36,21 @@ build/
 application.properties
 src/main/resources/application.properties
 
+### Logs ###
+logs/
+*.log
+
+### Database ###
+*.db
+*.sqlite
+
+### Environment Variables ###
+.env
+.env.local
+.env.*.local
+
+### OS ###
+.DS_Store
+Thumbs.db
+
 
