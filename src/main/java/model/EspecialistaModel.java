@@ -8,12 +8,22 @@ public class EspecialistaModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true)
     private int id;
 
+    @Column(name = "nombre", length = 50)
     private String nombre;
+
+    @Column(name = "apellido", length = 50)
     private String apellido;
+
+    @Column(name = "oficio", length = 100)
     private String oficio;
+
+    @Column(name = "disponibilidad")
     private boolean disponibilidad;
+
+    @Column(name = "puntuacion")
     private int puntuacion;
 
     public EspecialistaModel() {}
