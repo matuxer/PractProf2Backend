@@ -30,7 +30,7 @@ public class EspecialistaController {
 
     // GET para obtener un registro por ID
     @GetMapping("/{id}")
-    public EspecialistaModel getById(@PathVariable int id) {
+    public EspecialistaModel getById(@PathVariable Long id) {
         return especialistaDao.obtenerPorId(id).orElse(null);
     }
 
@@ -42,13 +42,13 @@ public class EspecialistaController {
 
     // PUT para actualizar un registro existente
     @PutMapping("/{id}")
-    public EspecialistaModel update(@PathVariable int id, @RequestBody EspecialistaModel especialistaActualizado) {
+    public EspecialistaModel update(@PathVariable Long id, @RequestBody EspecialistaModel especialistaActualizado) {
         return especialistaDao.actualizar(id, especialistaActualizado);
     }
 
     // DELETE para eliminar un registro por ID
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable int id) {
+    public String delete(@PathVariable Long id) {
         if (especialistaDao.eliminar(id)) {
             return "Especialista con ID " + id + " eliminado correctamente.";
         } else {

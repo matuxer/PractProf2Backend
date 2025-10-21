@@ -21,7 +21,7 @@ public class EspecialistaDao {
     }
 
     // busca un registro por su ID
-    public Optional<EspecialistaModel> obtenerPorId(int id) {
+    public Optional<EspecialistaModel> obtenerPorId(Long id) {
         return especialistaRepository.findById(id);
     }
 
@@ -31,7 +31,7 @@ public class EspecialistaDao {
     }
 
     // borra un registro por ID
-    public boolean eliminar(int id) {
+    public boolean eliminar(Long id) {
         if (especialistaRepository.existsById(id)) {
             especialistaRepository.deleteById(id);
             return true;
@@ -40,7 +40,7 @@ public class EspecialistaDao {
     }
 
     // modifica un registro existente
-    public EspecialistaModel actualizar(int id, EspecialistaModel especialistaActualizado) {
+    public EspecialistaModel actualizar(Long id, EspecialistaModel especialistaActualizado) {
         return especialistaRepository.findById(id).map(especialista -> {
             especialista.setNombre(especialistaActualizado.getNombre());
             especialista.setApellido(especialistaActualizado.getApellido());

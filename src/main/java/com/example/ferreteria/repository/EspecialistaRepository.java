@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.example.ferreteria.model.EspecialistaModel;
 
 @Repository
-public interface EspecialistaRepository extends JpaRepository<EspecialistaModel, Integer> {
+public interface EspecialistaRepository extends JpaRepository<EspecialistaModel, Long> {
 
 }
