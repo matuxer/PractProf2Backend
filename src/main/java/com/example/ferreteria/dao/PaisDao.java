@@ -8,7 +8,7 @@ import com.example.ferreteria.repository.PaisRepository;
 import java.util.List;
 
 @Repository
-public class PaisDAO {
+public class PaisDao {
 
     @Autowired
     private PaisRepository paisRepository;

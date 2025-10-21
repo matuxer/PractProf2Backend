@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 
 @Entity
-@Table(name="País")
+@Table(name="paises")
 public class PaisModel {
 
 
