@@ -1,12 +1,13 @@
-package dao;
-
-import model.EspecialistaModel;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-import repository.EspecialistaRepository;
+package com.example.ferreteria.dao;
 
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.example.ferreteria.model.EspecialistaModel;
+import com.example.ferreteria.repository.EspecialistaRepository;
 
 @Repository
 public class EspecialistaDao {
@@ -50,4 +51,3 @@ public class EspecialistaDao {
         }).orElse(null);
     }
 }
-
