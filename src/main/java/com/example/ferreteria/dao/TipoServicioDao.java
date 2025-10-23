@@ -3,12 +3,12 @@ package com.example.ferreteria.dao;
 
 import com.example.ferreteria.model.TipoServicioModel;
 import com.example.ferreteria.repository.TipoServicioRepository;
-import jdk.jfr.Registered;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Registered
+@Repository
 public class TipoServicioDao {
 
     @Autowired
