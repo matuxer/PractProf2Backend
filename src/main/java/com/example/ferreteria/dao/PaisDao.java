@@ -21,8 +21,8 @@ public class PaisDao {
         return paisRepository.findById(id).orElse(null);
     }
 
-    public PaisModel crear(PaisModel paisModel){
-        return paisRepository.save(paisModel);
+    public PaisModel crear(PaisModel pais){
+        return paisRepository.save(pais);
     }
 
 
