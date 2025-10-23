@@ -14,7 +14,7 @@ public class ItemModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private int id; 
+    private Long id; 
 
    // @ManyToOne // Un Item pertenece a una Compra
    // @JoinColumn(name = "id_compra") 
@@ -33,18 +33,18 @@ public class ItemModel {
     public ItemModel() {
     }
 
-    public ItemModel(int id, /*CompraModel compra, ProductoModel producto,*/ float precio_unitario) {
+    public ItemModel(Long id, /*CompraModel compra, ProductoModel producto,*/ float precio_unitario) {
         this.id = id;
        // this.compra = compra;
        // this.producto = producto;
         this.precio_unitario = precio_unitario;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
