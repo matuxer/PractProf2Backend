@@ -34,7 +34,7 @@ public class ClienteModel {
     //Relacion con localidad
     @ManyToOne
     @JoinColumn(
-            name = "id_localida",
+            name = "id_localidad",
             foreignKey = @ForeignKey(name = "FK_Localidad")
     )
     private LocalidadModel localidad;
