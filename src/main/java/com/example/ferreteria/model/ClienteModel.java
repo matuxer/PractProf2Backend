@@ -34,24 +34,21 @@ public class ClienteModel {
     //Relacion con localidad
     @ManyToOne
     @JoinColumn(
-            name = "id_localidad",
-            foreignKey = @ForeignKey(name = "FK_Localidad")
+            name = "id_localidad"
     )
     private LocalidadModel localidad;
 
     //Relacion con provincia
     @ManyToOne
     @JoinColumn(
-            name = "id_provincia",
-            foreignKey = @ForeignKey(name = "FK_Provincia")
+            name = "id_provincia"
     )
     private ProvinciaModel provincia;
 
     //Relacion con pais
     @ManyToOne
     @JoinColumn(
-            name = "id_pais",
-            foreignKey = @ForeignKey(name = "FK_Pais")
+            name = "id_pais"
     )
     private PaisModel pais;
 
