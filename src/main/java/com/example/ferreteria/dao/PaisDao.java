@@ -21,8 +21,8 @@ public class PaisDao {
         return paisRepository.findById(id).orElse(null);
     }
 
-    public PaisModel crear(PaisModel paisModel){
-        return paisRepository.save(paisModel);
+    public PaisModel crear(PaisModel pais){
+        return paisRepository.save(pais);
     }
 
 
@@ -34,9 +34,9 @@ public class PaisDao {
         return false;
     }
 
-    public PaisModel actualizar(Long id, PaisModel paisAcrualizado){
+    public PaisModel actualizar(Long id, PaisModel paisActualizado){
         return paisRepository.findById(id).map(pais ->{
-            pais.setNombre(paisAcrualizado.getNombre());
+            pais.setNombre(paisActualizado.getNombre());
             return paisRepository.save(pais);
         }).orElse(null);
     }
