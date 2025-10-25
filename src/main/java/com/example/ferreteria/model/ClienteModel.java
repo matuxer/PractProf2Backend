@@ -19,13 +19,13 @@ public class ClienteModel {
     @Column(name="correo", length = 50)
     private String correo;
 
-    @Column(name="contraseña", length = 50)
-    private String contraseña;
+    @Column(name="password", length = 50)
+    private String password;
 
-    @Column(name = "telefono")
-    private int telefono;
+    @Column(name = "telefono", length = 50)
+    private String telefono;
 
-    @Column(name = "puntos recompensa")
+    @Column(name = "puntosRecompensa")
     private int puntosRecompensa;
 
     @Column(name="domicilio", length = 50)
@@ -55,12 +55,12 @@ public class ClienteModel {
     public ClienteModel() {
     }
 
-    public ClienteModel(Long id, String nombre, String apellido, String correo, String contraseña, int telefono, int puntosRecompensa, String domicilio, LocalidadModel localidad, ProvinciaModel provincia, PaisModel pais) {
+    public ClienteModel(Long id, String nombre, String apellido, String correo, String password, String telefono, int puntosRecompensa, String domicilio, LocalidadModel localidad, ProvinciaModel provincia, PaisModel pais) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
-        this.contraseña = contraseña;
+        this.password = password;
         this.telefono = telefono;
         this.puntosRecompensa = puntosRecompensa;
         this.domicilio = domicilio;
@@ -102,18 +102,18 @@ public class ClienteModel {
     }
 
     public String getContraseña() {
-        return contraseña;
+        return password;
     }
 
     public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+        this.password = password;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
