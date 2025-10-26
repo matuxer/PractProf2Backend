@@ -24,7 +24,7 @@ public class ServicioModel {
     @Column(name="precio")
     private float precio;
 
-    @Column(name="tipo_id")
+    @Column(name="id_tipo")
     private int tipo_id;
 
     @Column(name="id_especialista")
