@@ -13,7 +13,7 @@ public class ServicioModel {
 
     //id: INT AUTOINC UNIQUE
     //precio: FLOAT
-    //tipo_id: INT → FOREIGNKEY → Servicio_Tipo
+    //id_tipo: INT → FOREIGNKEY → Servicio_Tipo
     //id_especialista: INT → FOREIGNKEY → Especialista
 
     @Id
@@ -25,7 +25,7 @@ public class ServicioModel {
     private float precio;
 
     @Column(name="id_tipo")
-    private int tipo_id;
+    private int id_tipo;
 
     @Column(name="id_especialista")
     private int id_especialista;
@@ -33,10 +33,10 @@ public class ServicioModel {
     public ServicioModel() {
     }
 
-    public ServicioModel(Long id, float precio, int tipo_id, int id_especialista) {
+    public ServicioModel(Long id, float precio, int id_tipo, int id_especialista) {
         this.id = id;
         this.precio = precio;
-        this.tipo_id = tipo_id;
+        this.id_tipo = id_tipo;
         this.id_especialista = id_especialista;
     }
 
@@ -56,12 +56,12 @@ public class ServicioModel {
         this.precio = precio;
     }
 
-    public int getTipo_id() {
-        return tipo_id;
+    public int getid_tipo() {
+        return id_tipo;
     }
 
-    public void setTipo_id(int tipo_id) {
-        this.tipo_id = tipo_id;
+    public void setid_tipo(int id_tipo) {
+        this.id_tipo = id_tipo;
     }
 
     public int getId_especialista() {
