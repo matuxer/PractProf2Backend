@@ -1,6 +1,8 @@
 package com.example.ferreteria.model;
 
 import jakarta.persistence.*;
+import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 @Table(name="clientes")
@@ -52,6 +54,9 @@ public class ClienteModel {
     )
     private PaisModel pais;
 
+    private List<FeedbackModel> feedbacksEscritos = new ArrayList<>();
+
+
     public ClienteModel() {
     }
 
@@ -67,6 +72,7 @@ public class ClienteModel {
         this.localidad = localidad;
         this.provincia = provincia;
         this.pais = pais;
+
     }
 
     public Long getId() {
@@ -156,4 +162,13 @@ public class ClienteModel {
     public void setPais(PaisModel pais) {
         this.pais = pais;
     }
+
+    public List<FeedbackModel> getFeedbacksEscritos() {
+        return feedbacksEscritos;
+    }
+
+    public void setFeedbacksEscritos(List<FeedbackModel> feedbacksEscritos) {
+        this.feedbacksEscritos = feedbacksEscritos;
+    }
+    
 }
