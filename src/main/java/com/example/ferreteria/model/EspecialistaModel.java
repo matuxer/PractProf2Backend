@@ -6,6 +6,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "especialistas")
@@ -30,6 +32,8 @@ public class EspecialistaModel {
 
     @Column(name = "puntuacion")
     private int puntuacion;
+
+    private List<ServicioModel> servicios = new ArrayList<>();
 
     public EspecialistaModel() {}
 
@@ -88,6 +92,14 @@ public class EspecialistaModel {
 
     public void setPuntuacion(int puntuacion) {
         this.puntuacion = puntuacion;
+    }
+
+    public List<ServicioModel> getServicios() {
+        return servicios;
+    }
+
+    public void setServicios(List<ServicioModel> servicios) {
+        this.servicios = servicios;
     }
 
     @Override
