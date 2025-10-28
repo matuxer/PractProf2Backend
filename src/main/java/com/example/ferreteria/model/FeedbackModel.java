@@ -21,15 +21,21 @@ public class FeedbackModel {
     @Column(name = "comentario", length = 255)
     private String comentario;
 
+    // Relación con Especialista
+    @ManyToOne
+    @JoinColumn(name = "id_especialista", nullable = false)
+    private EspecialistaModel especialista;
+
 
     public FeedbackModel() {
     }
 
 
-    public FeedbackModel(LocalDate fecha, int clasificacion, String comentario) {
+    public FeedbackModel(LocalDate fecha, int clasificacion, String comentario,EspecialistaModel especialista) {
         this.fecha = fecha;
         this.clasificacion = clasificacion;
         this.comentario = comentario;
+        this.especialista = especialista;
     }
 
 
@@ -63,5 +69,13 @@ public class FeedbackModel {
 
     public void setComentario(String comentario) {
         this.comentario = comentario;
+    }
+
+    public EspecialistaModel getEspecialista() {
+        return especialista;
+    }
+
+    public void setEspecialista(EspecialistaModel especialista) {
+        this.especialista = especialista;
     }
 }
