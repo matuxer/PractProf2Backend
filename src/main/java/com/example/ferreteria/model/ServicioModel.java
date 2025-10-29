@@ -29,9 +29,6 @@ public class ServicioModel {
     @Column(name="id_tipo")
     private int id_tipo;
 
-    @Column(name="id_especialista")
-    private int id_especialista;
-
     @ManyToOne
     @JoinColumn(name = "id_especialista")
     private EspecialistaModel especialista;
@@ -40,11 +37,10 @@ public class ServicioModel {
     public ServicioModel() {
     }
 
-    public ServicioModel(Long id, float precio, int id_tipo, int id_especialista, EspecialistaModel especialista) {
+    public ServicioModel(Long id, float precio, int id_tipo, EspecialistaModel especialista) {
         this.id = id;
         this.precio = precio;
         this.id_tipo = id_tipo;
-        this.id_especialista = id_especialista;
         this.especialista = especialista;
     }
 
@@ -70,14 +66,6 @@ public class ServicioModel {
 
     public void setid_tipo(int id_tipo) {
         this.id_tipo = id_tipo;
-    }
-
-    public int getId_especialista() {
-        return id_especialista;
-    }
-
-    public void setId_especialista(int id_especialista) {
-        this.id_especialista = id_especialista;
     }
 
     public EspecialistaModel getEspecialista() {
