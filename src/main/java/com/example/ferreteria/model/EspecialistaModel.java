@@ -36,6 +36,9 @@ public class EspecialistaModel {
 
     @OneToMany(mappedBy = "especialista")
     private List<FeedbackModel> feedbacksRecibidos = new ArrayList<>();
+  
+    @OneToMany(mappedBy = "especialista")
+    private List<ServicioModel> servicios = new ArrayList<>();
 
     public EspecialistaModel() {}
 
@@ -102,6 +105,12 @@ public class EspecialistaModel {
 
     public void setFeedbacksRecibidos(List<FeedbackModel> feedbacksRecibidos) {
         this.feedbacksRecibidos = feedbacksRecibidos;
+    public List<ServicioModel> getServicios() {
+        return servicios;
+    }
+
+    public void setServicios(List<ServicioModel> servicios) {
+        this.servicios = servicios;
     }
 
     @Override
