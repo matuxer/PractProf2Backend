@@ -21,16 +21,22 @@ public class FeedbackModel {
     @Column(name = "comentario", length = 255)
     private String comentario;
 
+    @ManyToOne
+    @JoinColumn(name = "id_cliente")
+    private ClienteModel cliente;
+
 
     public FeedbackModel() {
     }
 
 
-    public FeedbackModel(LocalDate fecha, int clasificacion, String comentario) {
+    public FeedbackModel(LocalDate fecha, int clasificacion, String comentario, ClienteModel cliente) {
         this.fecha = fecha;
         this.clasificacion = clasificacion;
         this.comentario = comentario;
+        this.cliente = cliente;
     }
+
 
 
     public Long getId() {
@@ -63,5 +69,15 @@ public class FeedbackModel {
 
     public void setComentario(String comentario) {
         this.comentario = comentario;
+    }
+
+    public ClienteModel getCliente() {
+
+        return cliente;
+    }
+
+    public void setCliente(ClienteModel cliente) {
+
+        this.cliente = cliente;
     }
 }
