@@ -72,10 +72,12 @@ public class FeedbackModel {
     }
 
     public ClienteModel getCliente() {
+
         return cliente;
     }
 
     public void setCliente(ClienteModel cliente) {
+
         this.cliente = cliente;
     }
 }

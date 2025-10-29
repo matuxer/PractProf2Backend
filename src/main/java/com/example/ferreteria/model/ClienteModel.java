@@ -54,6 +54,7 @@ public class ClienteModel {
     )
     private PaisModel pais;
 
+    @OneToMany(mappedBy = "cliente")
     private List<FeedbackModel> feedbacksEscritos = new ArrayList<>();
 
 
