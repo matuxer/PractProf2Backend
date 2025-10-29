@@ -105,6 +105,8 @@ public class EspecialistaModel {
 
     public void setFeedbacksRecibidos(List<FeedbackModel> feedbacksRecibidos) {
         this.feedbacksRecibidos = feedbacksRecibidos;
+    }
+
     public List<ServicioModel> getServicios() {
         return servicios;
     }
