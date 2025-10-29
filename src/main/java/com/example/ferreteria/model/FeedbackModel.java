@@ -23,7 +23,7 @@ public class FeedbackModel {
 
     // Relación con Especialista
     @ManyToOne
-    @JoinColumn(name = "id_especialista", nullable = false)
+    @JoinColumn(name = "id_especialista")
     private EspecialistaModel especialista;
 
 
