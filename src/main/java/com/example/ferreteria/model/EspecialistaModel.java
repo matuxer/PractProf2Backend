@@ -1,11 +1,7 @@
 package com.example.ferreteria.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -33,6 +29,7 @@ public class EspecialistaModel {
     @Column(name = "puntuacion")
     private int puntuacion;
 
+    @OneToMany(mappedBy = "especialista")
     private List<ServicioModel> servicios = new ArrayList<>();
 
     public EspecialistaModel() {}
