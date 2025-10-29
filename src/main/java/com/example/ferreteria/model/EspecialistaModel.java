@@ -1,11 +1,9 @@
 package com.example.ferreteria.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "especialistas")
@@ -30,6 +28,9 @@ public class EspecialistaModel {
 
     @Column(name = "puntuacion")
     private int puntuacion;
+
+    @OneToMany(mappedBy = "especialista")
+    private List<ServicioModel> servicios = new ArrayList<>();
 
     public EspecialistaModel() {}
 
@@ -88,6 +89,14 @@ public class EspecialistaModel {
 
     public void setPuntuacion(int puntuacion) {
         this.puntuacion = puntuacion;
+    }
+
+    public List<ServicioModel> getServicios() {
+        return servicios;
+    }
+
+    public void setServicios(List<ServicioModel> servicios) {
+        this.servicios = servicios;
     }
 
     @Override

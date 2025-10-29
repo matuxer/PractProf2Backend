@@ -6,6 +6,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
 
 @Entity
 @Table (name = "servicio")
@@ -30,14 +32,20 @@ public class ServicioModel {
     @Column(name="id_especialista")
     private int id_especialista;
 
+    @ManyToOne
+    @JoinColumn(name = "id_especialista")
+    private EspecialistaModel especialista;
+
+
     public ServicioModel() {
     }
 
-    public ServicioModel(Long id, float precio, int id_tipo, int id_especialista) {
+    public ServicioModel(Long id, float precio, int id_tipo, int id_especialista, EspecialistaModel especialista) {
         this.id = id;
         this.precio = precio;
         this.id_tipo = id_tipo;
         this.id_especialista = id_especialista;
+        this.especialista = especialista;
     }
 
     public Long getId() {
@@ -72,6 +80,11 @@ public class ServicioModel {
         this.id_especialista = id_especialista;
     }
 
-    
+    public EspecialistaModel getEspecialista() {
+        return especialista;
+    }
 
+    public void setEspecialista(EspecialistaModel especialista) {
+        this.especialista = especialista;
+    }
 }
