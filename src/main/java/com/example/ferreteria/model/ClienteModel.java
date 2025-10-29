@@ -113,7 +113,7 @@ public class ClienteModel {
     }
 
     public void setContraseña(String contraseña) {
-        this.password = password;
+        this.password = contraseña;
     }
 
     public String getTelefono() {
