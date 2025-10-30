@@ -6,10 +6,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
+
 
 // Modelo de datos para el producto
 @Entity
 @Table(name = "productos")
+
 public class ProductoModel {
 
     @Id
@@ -25,6 +29,12 @@ public class ProductoModel {
 
     @Column(name = "stock")
     private Integer stock;
+
+    // Relación con la tabla producto_categorias
+    @ManyToOne
+    @JoinColumn(name = "id_categoria") // nombre de la FK en la tabla productos
+    private ProductoCategoriaModel categoria;
+
 
     // Getters y setters
     public Long getId() {
@@ -57,5 +67,13 @@ public class ProductoModel {
 
     public void setStock(Integer stock) {
         this.stock = stock;
+    }
+
+    public ProductoCategoriaModel getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(ProductoCategoriaModel categoria) {
+        this.categoria = categoria;
     }
 }
