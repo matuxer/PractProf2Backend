@@ -6,6 +6,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 // Modelo de datos para el producto
 @Entity
@@ -25,6 +28,10 @@ public class ProductoModel {
 
     @Column(name = "stock")
     private Integer stock;
+
+    // Relación uno a muchos
+    @OneToMany(mappedBy = "producto")
+    private List<ItemModel> items = new ArrayList<>();
 
     // Getters y setters
     public Long getId() {
@@ -57,5 +64,13 @@ public class ProductoModel {
 
     public void setStock(Integer stock) {
         this.stock = stock;
+    }
+
+    public List<ItemModel> getItems() {
+        return items;
+    }
+
+    public void setItems(List<ItemModel> items) {
+        this.items = items;
     }
 }
