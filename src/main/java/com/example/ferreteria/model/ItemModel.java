@@ -5,40 +5,44 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table (name = "item")
+@Table(name = "item")
 public class ItemModel {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
-    private Long id; 
-
-   // @ManyToOne // Un Item pertenece a una Compra
-   // @JoinColumn(name = "id_compra") 
-   //private CompraModel compra;
+    @Column(name = "id")
+    private Long id;
 
 
-   // @ManyToOne // Un Item está relacionado con un Producto
-   // @JoinColumn(name = "id_producto")
-   // private ProductoModel producto;
+    // Relación Muchos a uno
+    @ManyToOne
+    @JoinColumn(name = "id_producto")
+    private ProductoModel producto;
 
-    //cantidad: INT
 
-    @Column(name="precio_unitario")
+    @Column(name = "cantidad")
+    private int cantidad;
+
+    @Column(name = "precio_unitario")
     private float precio_unitario;
+
 
     public ItemModel() {
     }
 
-    public ItemModel(Long id, /*CompraModel compra, ProductoModel producto,*/ float precio_unitario) {
+
+    public ItemModel(Long id, ProductoModel producto, int cantidad, float precio_unitario) {
         this.id = id;
-       // this.compra = compra;
-       // this.producto = producto;
+        this.producto = producto;
+        this.cantidad = cantidad;
         this.precio_unitario = precio_unitario;
     }
+
 
     public Long getId() {
         return id;
@@ -48,21 +52,22 @@ public class ItemModel {
         this.id = id;
     }
 
-   /*  public CompraModel getCompra() {
-        return compra;
-    }
-
-    public void setCompra(CompraModel compra) {
-        this.compra = compra;
-    }
 
     public ProductoModel getProducto() {
         return producto;
     }
 
     public void setProducto(ProductoModel producto) {
-        this.producto = producto; */
-    
+        this.producto = producto;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
 
     public float getPrecio_unitario() {
         return precio_unitario;
@@ -74,8 +79,9 @@ public class ItemModel {
 
     @Override
     public String toString() {
-        return "ItemModel [id=" + id + ", precio_unitario=" + precio_unitario + ", getId()=" + getId()
-                + ", getPrecio_unitario()=" + getPrecio_unitario() + "]";
+        return "ItemModel [id=" + id +
+                ", producto=" + (producto != null ? producto.getId() : null) +
+                ", cantidad=" + cantidad +
+                ", precio_unitario=" + precio_unitario + "]";
     }
-    
 }

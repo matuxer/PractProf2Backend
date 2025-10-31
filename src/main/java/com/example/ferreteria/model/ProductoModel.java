@@ -6,6 +6,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 
@@ -30,6 +33,9 @@ public class ProductoModel {
     @Column(name = "stock")
     private Integer stock;
 
+    // Relación uno a muchos
+    @OneToMany(mappedBy = "producto")
+    private List<ItemModel> items = new ArrayList<>();
     // Relación con la tabla producto_categorias
     @ManyToOne
     @JoinColumn(name = "id_categoria") // nombre de la FK en la tabla productos
@@ -69,6 +75,13 @@ public class ProductoModel {
         this.stock = stock;
     }
 
+    public List<ItemModel> getItems() {
+        return items;
+    }
+
+    public void setItems(List<ItemModel> items) {
+        this.items = items;
+    }
     public ProductoCategoriaModel getCategoria() {
         return categoria;
     }
