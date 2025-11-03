@@ -5,9 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table (name = "servicio")
@@ -26,8 +26,10 @@ public class ServicioModel {
     @Column(name="precio")
     private float precio;
 
-    @Column(name="id_tipo")
-    private int id_tipo;
+    //@Column(name="id_tipo")
+    @ManyToOne
+    @JoinColumn(name="id_tipo")
+    private TipoServicioModel tipoServicio;
 
     @ManyToOne
     @JoinColumn(name = "id_especialista")
@@ -37,10 +39,10 @@ public class ServicioModel {
     public ServicioModel() {
     }
 
-    public ServicioModel(Long id, float precio, int id_tipo, EspecialistaModel especialista) {
+    public ServicioModel(Long id, float precio, TipoServicioModel tipoServicio, EspecialistaModel especialista) {
         this.id = id;
         this.precio = precio;
-        this.id_tipo = id_tipo;
+        this.tipoServicio = tipoServicio;
         this.especialista = especialista;
     }
 
@@ -60,12 +62,12 @@ public class ServicioModel {
         this.precio = precio;
     }
 
-    public int getid_tipo() {
-        return id_tipo;
+    public TipoServicioModel getTipoServicio() {
+        return tipoServicio;
     }
 
-    public void setid_tipo(int id_tipo) {
-        this.id_tipo = id_tipo;
+    public void setTipoServicio(TipoServicioModel tipoServicio) {
+        this.tipoServicio = tipoServicio;
     }
 
     public EspecialistaModel getEspecialista() {
@@ -75,4 +77,5 @@ public class ServicioModel {
     public void setEspecialista(EspecialistaModel especialista) {
         this.especialista = especialista;
     }
+
 }
