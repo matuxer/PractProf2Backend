@@ -37,6 +37,7 @@ public class TipoServicioDao {
     public TipoServicioModel auctualizar(Long id, TipoServicioModel tipoServicioActualizado){
         return tipoServicioRepository.findById(id).map(tipoServicio -> {
             tipoServicio.setNombre(tipoServicioActualizado.getNombre());
+            tipoServicio.setServicios(tipoServicioActualizado.getServicios());
             return tipoServicioRepository.save(tipoServicio);
         }).orElse(null);
 

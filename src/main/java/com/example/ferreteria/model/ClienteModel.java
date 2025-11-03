@@ -57,6 +57,9 @@ public class ClienteModel {
     @OneToMany(mappedBy = "cliente")
     private List<FeedbackModel> feedbacksEscritos = new ArrayList<>();
 
+    @OneToMany(mappedBy = "cliente")
+    private List<CompraModel> compras = new ArrayList<>();
+
 
     public ClienteModel() {
     }
@@ -171,5 +174,11 @@ public class ClienteModel {
     public void setFeedbacksEscritos(List<FeedbackModel> feedbacksEscritos) {
         this.feedbacksEscritos = feedbacksEscritos;
     }
+
+    public List<CompraModel> getCompras() {
+        return compras; }
+
+    public void setCompras(List<CompraModel> compras) {
+        this.compras = compras; }
     
 }

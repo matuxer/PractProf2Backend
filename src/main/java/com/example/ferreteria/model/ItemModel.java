@@ -22,8 +22,8 @@ public class ItemModel {
     @Column(name = "cantidad")
     private int cantidad;
 
-    @Column(name = "precio_unitario")
-    private float precio_unitario;
+    @Column(name = "precio_total")
+    private float precio_total;
 
     // Relación Muchos a uno
     @ManyToOne
@@ -39,12 +39,10 @@ public class ItemModel {
     }
 
 
-    public ItemModel(Long id, int cantidad, float precio_unitario, ProductoModel producto, CompraModel compra) {
+    public ItemModel(Long id, int cantidad, float precio_total) {
         this.id = id;
         this.cantidad = cantidad;
-        this.precio_unitario = precio_unitario;
-        this.producto = producto;
-        this.compra = compra;
+        this.precio_total = precio_total;
     }
 
 
@@ -65,12 +63,12 @@ public class ItemModel {
         this.cantidad = cantidad;
     }
 
-    public float getPrecio_unitario() {
-        return precio_unitario;
+    public float getPrecio_total() {
+        return precio_total;
     }
 
-    public void setPrecio_unitario(float precio_unitario) {
-        this.precio_unitario = precio_unitario;
+    public void setPrecio_total(float precio_total) {
+        this.precio_total = precio_total;
     }
 
     public ProductoModel getProducto() {
