@@ -1,12 +1,10 @@
 package com.example.ferreteria.model;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "provincias")
@@ -20,6 +18,9 @@ public class ProvinciaModel {
 
     @Column(name = "nombre", length = 50)
     private String nombre;
+
+    @OneToMany(mappedBy = "provincia")
+    private List<ClienteModel> clientes = new ArrayList<>();
 
     public ProvinciaModel() {
     }
