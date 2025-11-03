@@ -40,7 +40,7 @@ public class ItemDao{
     // modifica un registro existente
     public ItemModel actualizar(Long id, ItemModel itemActualizado) {
         return itemRepository.findById(id).map(item -> {
-            item.setPrecio_unitario(itemActualizado.getPrecio_unitario());
+            item.setPrecio_total(itemActualizado.getPrecio_total());
             return itemRepository.save(item);
         }).orElse(null);
     }

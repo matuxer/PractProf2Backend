@@ -42,6 +42,7 @@ public class ServicioDao {
     public ServicioModel actualizar(Long id, ServicioModel servicioActualizado) {
         return servicioRepository.findById(id).map(servicio -> {
                     servicio.setPrecio(servicioActualizado.getPrecio());
+                    servicio.setTipoServicio(servicioActualizado.getTipoServicio());
                     return servicioRepository.save(servicio);
                 })
                 .orElse(null);
