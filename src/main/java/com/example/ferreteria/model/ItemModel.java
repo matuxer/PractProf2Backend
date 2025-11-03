@@ -19,26 +19,28 @@ public class ItemModel {
     private Long id;
 
 
-    // Relación Muchos a uno
-    @ManyToOne
-    @JoinColumn(name = "id_producto")
-    private ProductoModel producto;
-
-
     @Column(name = "cantidad")
     private int cantidad;
 
     @Column(name = "precio_total")
     private float precio_total;
 
+    // Relación Muchos a uno
+    @ManyToOne
+    @JoinColumn(name = "id_producto")
+    private ProductoModel producto;
+
+    @ManyToOne
+    @JoinColumn(name = "id_compra")
+    private CompraModel compra;
+
 
     public ItemModel() {
     }
 
 
-    public ItemModel(Long id, ProductoModel producto, int cantidad, float precio_total) {
+    public ItemModel(Long id, int cantidad, float precio_total) {
         this.id = id;
-        this.producto = producto;
         this.cantidad = cantidad;
         this.precio_total = precio_total;
     }
@@ -52,14 +54,6 @@ public class ItemModel {
         this.id = id;
     }
 
-
-    public ProductoModel getProducto() {
-        return producto;
-    }
-
-    public void setProducto(ProductoModel producto) {
-        this.producto = producto;
-    }
 
     public int getCantidad() {
         return cantidad;
@@ -77,11 +71,29 @@ public class ItemModel {
         this.precio_total = precio_total;
     }
 
+    public ProductoModel getProducto() {
+        return producto;
+    }
+
+    public void setProducto(ProductoModel producto) {
+        this.producto = producto;
+    }
+
+    public CompraModel getCompra() {
+        return compra;
+    }
+
+    public void setCompra(CompraModel compra) {
+        this.compra = compra;
+    }
+
+
     @Override
     public String toString() {
         return "ItemModel [id=" + id +
-                ", producto=" + (producto != null ? producto.getId() : null) +
                 ", cantidad=" + cantidad +
-                ", precio_unitario=" + precio_total + "]";
+                ", precio_unitario=" + precio_unitario +
+                ", producto=" + (producto != null ? producto.getId() : null) +
+                ", compra=" + (compra != null ? compra.getId() : null)+ "]";
     }
 }

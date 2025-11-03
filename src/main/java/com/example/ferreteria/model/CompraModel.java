@@ -6,6 +6,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 
@@ -34,6 +37,8 @@ public class CompraModel {
     @Column(name="id_cliente")
     private int id_cliente;
 
+    @OneToMany(mappedBy = "compra")
+    private List<ItemModel> items = new ArrayList<>();
     // Relación MUCHOS a UNO
     @ManyToOne
     @JoinColumn(name="id_cliente")
@@ -84,8 +89,16 @@ public class CompraModel {
         this.id_cliente = id_cliente;
     }
 
+    public List<ItemModel> getItems() {
+        return items;
+    }
+
+    public void setItems(List<ItemModel> items) {
+        this.items = items;
+    }
     public ClienteModel getCliente() {
-        return cliente; }
+        return cliente; 
+    }
 
     public void setCliente(ClienteModel cliente) {
         this.cliente = cliente; }
