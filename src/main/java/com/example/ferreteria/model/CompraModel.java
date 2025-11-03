@@ -6,6 +6,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
 
 
 @Entity
@@ -32,14 +34,22 @@ public class CompraModel {
     @Column(name="id_cliente")
     private int id_cliente;
 
+    // Relación MUCHOS a UNO
+    @ManyToOne
+    @JoinColumn(name="id_cliente")
+    private ClienteModel cliente;
+
+
+
     public CompraModel() {
     }
 
-    public CompraModel(Long id, float descuento, float total, int id_cliente) {
+    public CompraModel(Long id, float descuento, float total, int id_cliente, ClienteModel cliente) {
         this.id = id;
         this.descuento = descuento;
         this.total = total;
         this.id_cliente = id_cliente;
+        this.cliente = cliente;
     }
 
     public Long getId() {
@@ -73,6 +83,12 @@ public class CompraModel {
     public void setId_cliente(int id_cliente) {
         this.id_cliente = id_cliente;
     }
+
+    public ClienteModel getCliente() {
+        return cliente; }
+
+    public void setCliente(ClienteModel cliente) {
+        this.cliente = cliente; }
 
     @Override
     public String toString() {
