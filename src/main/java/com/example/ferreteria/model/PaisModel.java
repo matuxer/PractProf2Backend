@@ -2,6 +2,9 @@ package com.example.ferreteria.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
 @Table(name="paises")
@@ -15,6 +18,9 @@ public class PaisModel {
 
     @Column(name = "nombre", length = 50 )
     private String nombre;
+
+    @OneToMany(mappedBy = "pais")
+    private List<ClienteModel> clientes = new ArrayList<>();
 
     public PaisModel() {
     }
