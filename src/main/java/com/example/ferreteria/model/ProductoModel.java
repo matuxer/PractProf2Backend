@@ -33,9 +33,15 @@ public class ProductoModel {
     @Column(name = "stock")
     private Integer stock;
 
+    @Column(name = "precio_unitario")
+    private Float precio_unitario;
+
+
     // Relación uno a muchos
     @OneToMany(mappedBy = "producto")
     private List<ItemModel> items = new ArrayList<>();
+
+
     // Relación con la tabla producto_categorias
     @ManyToOne
     @JoinColumn(name = "id_categoria") // nombre de la FK en la tabla productos
@@ -73,6 +79,14 @@ public class ProductoModel {
 
     public void setStock(Integer stock) {
         this.stock = stock;
+    }
+
+    public Float getPrecio_unitario() {
+        return precio_unitario;
+    }
+
+    public void setPrecio_unitario(Float precio_unitario) {
+        this.precio_unitario = precio_unitario;
     }
 
     public List<ItemModel> getItems() {
