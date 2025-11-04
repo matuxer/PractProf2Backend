@@ -39,7 +39,7 @@ public class TipoServicioController {
     @DeleteMapping("/{id}")
     public String delete(@PathVariable Long id){
         if (tipoServicioDao.eliminar(id)) {
-            return "El tipo de servicio con ID " + id + "eliminado correctamente";
+            return "El tipo de servicio con ID " + id + "borrado correctamente";
         } else {
             return "Tipo de servicio con ID " + id + "no encontrado";
         }
