@@ -43,7 +43,7 @@ public class CompraDao {
         return compraRepository.findById(id).map(item -> {
             item.setDescuento(compraActualizado.getDescuento());
             item.setTotal(compraActualizado.getTotal());
-            item.setId_cliente(compraActualizado.getId_cliente());
+            item.setCliente(compraActualizado.getCliente());
             return compraRepository.save(item);
         }).orElse(null);
     }

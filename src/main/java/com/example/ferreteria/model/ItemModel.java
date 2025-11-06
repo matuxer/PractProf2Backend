@@ -92,7 +92,7 @@ public class ItemModel {
     public String toString() {
         return "ItemModel [id=" + id +
                 ", cantidad=" + cantidad +
-                ", precio_unitario=" + precio_unitario +
+                ", precio_total=" + precio_total +
                 ", producto=" + (producto != null ? producto.getId() : null) +
                 ", compra=" + (compra != null ? compra.getId() : null)+ "]";
     }
