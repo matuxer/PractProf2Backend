@@ -3,7 +3,9 @@ package com.example.ferreteria.seeder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.example.ferreteria.dao.OficioDao;
 import com.example.ferreteria.model.EspecialistaModel;
+import com.example.ferreteria.model.OficioModel;
 import com.example.ferreteria.repository.EspecialistaRepository;
 
 @Component
@@ -11,6 +13,9 @@ public class EspecialistaSeeder {
 
     @Autowired
     private EspecialistaRepository especialistaRepository;
+
+    @Autowired
+    private OficioDao oficioDao;
 
     public void seed() {
         if (especialistaRepository.count() > 0) {
@@ -57,16 +62,22 @@ public class EspecialistaSeeder {
 
         int especialistasCreados = 0;
         for (Object[] data : especialistasData) {
-            EspecialistaModel especialista = new EspecialistaModel();
-            especialista.setNombre((String) data[0]);
-            especialista.setApellido((String) data[1]);
-            especialista.setOficio((String) data[2]);
-            especialista.setDisponibilidad((Boolean) data[3]);
-            especialista.setPuntuacion((Integer) data[4]);
-            especialista.setPerfilImgUrl(null); // Sin imágenes por ahora
+            // Buscar el oficio por nombre
+            String nombreOficio = (String) data[2];
+            OficioModel oficio = oficioDao.obtenerPorNombre(nombreOficio);
             
-            especialistaRepository.save(especialista);
-            especialistasCreados++;
+            if (oficio != null) { // Solo crear si el oficio existe
+                EspecialistaModel especialista = new EspecialistaModel();
+                especialista.setNombre((String) data[0]);
+                especialista.setApellido((String) data[1]);
+                especialista.setOficio(oficio);
+                especialista.setDisponibilidad((Boolean) data[3]);
+                especialista.setPuntuacion((Integer) data[4]);
+                especialista.setPerfilImgUrl(null); // Sin imágenes por ahora
+                
+                especialistaRepository.save(especialista);
+                especialistasCreados++;
+            }
         }
 
         System.out.println("✅ Especialistas creados: " + especialistasCreados);
