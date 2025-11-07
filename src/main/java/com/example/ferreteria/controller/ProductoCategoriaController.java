@@ -32,6 +32,11 @@ public class ProductoCategoriaController {
         return productoCategoriaDao.obtenerPorId(id);
     }
 
+    @GetMapping("/buscar/{nombre}")
+    public ProductoCategoriaModel getByNombre(@PathVariable String nombre) {
+        return productoCategoriaDao.obtenerPorNombre(nombre);
+    }
+
     @PostMapping
     public ProductoCategoriaModel create(@RequestBody ProductoCategoriaModel productoCategoria) {
         return productoCategoriaDao.crear(productoCategoria);
