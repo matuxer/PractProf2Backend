@@ -16,7 +16,7 @@ import com.example.ferreteria.dao.ProductoCategoriaDao;
 import com.example.ferreteria.model.ProductoCategoriaModel;
 
 @RestController
-@RequestMapping("/producto-categoria")
+@RequestMapping("/producto-categorias")
 public class ProductoCategoriaController {
 
     @Autowired
