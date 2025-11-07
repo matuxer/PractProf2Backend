@@ -3,11 +3,15 @@ package com.example.ferreteria.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -26,8 +30,11 @@ public class EspecialistaModel {
     @Column(name = "apellido", length = 50)
     private String apellido;
 
-    @Column(name = "oficio", length = 100)
-    private String oficio;
+    // Relación con oficios
+    @ManyToOne
+    @JoinColumn(name = "id_oficio")
+    @JsonBackReference
+    private OficioModel oficio;
 
     @Column(name = "disponibilidad")
     private boolean disponibilidad;
@@ -46,7 +53,7 @@ public class EspecialistaModel {
 
     public EspecialistaModel() {}
 
-    public EspecialistaModel(String nombre, String apellido, String oficio, boolean disponibilidad, int puntuacion, String perfilImgUrl) {
+    public EspecialistaModel(String nombre, String apellido, OficioModel oficio, boolean disponibilidad, int puntuacion, String perfilImgUrl) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.oficio = oficio;
@@ -56,7 +63,7 @@ public class EspecialistaModel {
     }
 
     // Constructor sin perfil_img_url (para compatibilidad)
-    public EspecialistaModel(String nombre, String apellido, String oficio, boolean disponibilidad, int puntuacion) {
+    public EspecialistaModel(String nombre, String apellido, OficioModel oficio, boolean disponibilidad, int puntuacion) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.oficio = oficio;
@@ -89,11 +96,11 @@ public class EspecialistaModel {
         this.apellido = apellido;
     }
 
-    public String getOficio() {
+    public OficioModel getOficio() {
         return oficio;
     }
 
-    public void setOficio(String oficio) {
+    public void setOficio(OficioModel oficio) {
         this.oficio = oficio;
     }
 
@@ -143,7 +150,7 @@ public class EspecialistaModel {
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
-                ", oficio='" + oficio + '\'' +
+                ", oficio=" + (oficio != null ? oficio.getNombre() : null) +
                 ", disponibilidad=" + disponibilidad +
                 ", puntuacion=" + puntuacion +
                 '}';
