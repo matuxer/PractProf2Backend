@@ -1,14 +1,15 @@
 package com.example.ferreteria.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import java.util.List;
-import java.util.ArrayList;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "especialistas")
@@ -34,6 +35,9 @@ public class EspecialistaModel {
     @Column(name = "puntuacion")
     private int puntuacion;
 
+    @Column(name = "perfil_img_url")
+    private String perfilImgUrl;
+
     @OneToMany(mappedBy = "especialista")
     private List<FeedbackModel> feedbacksRecibidos = new ArrayList<>();
   
@@ -42,6 +46,16 @@ public class EspecialistaModel {
 
     public EspecialistaModel() {}
 
+    public EspecialistaModel(String nombre, String apellido, String oficio, boolean disponibilidad, int puntuacion, String perfilImgUrl) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.oficio = oficio;
+        this.disponibilidad = disponibilidad;
+        this.puntuacion = puntuacion;
+        this.perfilImgUrl = perfilImgUrl;
+    }
+
+    // Constructor sin perfil_img_url (para compatibilidad)
     public EspecialistaModel(String nombre, String apellido, String oficio, boolean disponibilidad, int puntuacion) {
         this.nombre = nombre;
         this.apellido = apellido;
@@ -97,6 +111,14 @@ public class EspecialistaModel {
 
     public void setPuntuacion(int puntuacion) {
         this.puntuacion = puntuacion;
+    }
+
+    public String getPerfilImgUrl() {
+        return perfilImgUrl;
+    }
+
+    public void setPerfilImgUrl(String perfilImgUrl) {
+        this.perfilImgUrl = perfilImgUrl;
     }
 
     public List<FeedbackModel> getFeedbacksRecibidos() {

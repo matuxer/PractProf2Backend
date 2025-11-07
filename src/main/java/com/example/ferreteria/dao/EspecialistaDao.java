@@ -47,6 +47,7 @@ public class EspecialistaDao {
             especialista.setOficio(especialistaActualizado.getOficio());
             especialista.setDisponibilidad(especialistaActualizado.isDisponibilidad());
             especialista.setPuntuacion(especialistaActualizado.getPuntuacion());
+            especialista.setPerfilImgUrl(especialistaActualizado.getPerfilImgUrl());
             return especialistaRepository.save(especialista);
         }).orElse(null);
     }
