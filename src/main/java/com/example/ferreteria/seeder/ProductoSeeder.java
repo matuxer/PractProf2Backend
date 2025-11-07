@@ -3,10 +3,10 @@ package com.example.ferreteria.seeder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.example.ferreteria.model.ProductoModel;
+import com.example.ferreteria.dao.ProductoCategoriaDao;
 import com.example.ferreteria.model.ProductoCategoriaModel;
+import com.example.ferreteria.model.ProductoModel;
 import com.example.ferreteria.repository.ProductoRepository;
-import com.example.ferreteria.repository.ProductoCategoriaRepository;
 
 @Component
 public class ProductoSeeder {
@@ -15,7 +15,7 @@ public class ProductoSeeder {
     private ProductoRepository productoRepository;
 
     @Autowired
-    private ProductoCategoriaRepository productoCategoriaRepository;
+    private ProductoCategoriaDao productoCategoriaDao;
 
     public void seed() {
         if (productoRepository.count() > 0) {
@@ -26,16 +26,16 @@ public class ProductoSeeder {
         System.out.println("🛠️ Creando productos...");
 
         // Obtener categorías
-        ProductoCategoriaModel herramientasManuales = productoCategoriaRepository.findByNombre("Herramientas Manuales").orElse(null);
-        ProductoCategoriaModel herramientasElectricas = productoCategoriaRepository.findByNombre("Herramientas Eléctricas").orElse(null);
-        ProductoCategoriaModel materialesConstruccion = productoCategoriaRepository.findByNombre("Materiales de Construcción").orElse(null);
-        ProductoCategoriaModel plomeria = productoCategoriaRepository.findByNombre("Plomería").orElse(null);
-        ProductoCategoriaModel electricidad = productoCategoriaRepository.findByNombre("Electricidad").orElse(null);
-        ProductoCategoriaModel pintureria = productoCategoriaRepository.findByNombre("Pinturería").orElse(null);
-        ProductoCategoriaModel tornilleria = productoCategoriaRepository.findByNombre("Tornillería").orElse(null);
-        ProductoCategoriaModel cerrajeria = productoCategoriaRepository.findByNombre("Cerrajería").orElse(null);
-        ProductoCategoriaModel soldadura = productoCategoriaRepository.findByNombre("Soldadura").orElse(null);
-        ProductoCategoriaModel seguridad = productoCategoriaRepository.findByNombre("Seguridad").orElse(null);
+        ProductoCategoriaModel herramientasManuales = productoCategoriaDao.obtenerPorNombre("Herramientas Manuales");
+        ProductoCategoriaModel herramientasElectricas = productoCategoriaDao.obtenerPorNombre("Herramientas Eléctricas");
+        ProductoCategoriaModel materialesConstruccion = productoCategoriaDao.obtenerPorNombre("Materiales de Construcción");
+        ProductoCategoriaModel plomeria = productoCategoriaDao.obtenerPorNombre("Plomería");
+        ProductoCategoriaModel electricidad = productoCategoriaDao.obtenerPorNombre("Electricidad");
+        ProductoCategoriaModel pintureria = productoCategoriaDao.obtenerPorNombre("Pinturería");
+        ProductoCategoriaModel tornilleria = productoCategoriaDao.obtenerPorNombre("Tornillería");
+        ProductoCategoriaModel cerrajeria = productoCategoriaDao.obtenerPorNombre("Cerrajería");
+        ProductoCategoriaModel soldadura = productoCategoriaDao.obtenerPorNombre("Soldadura");
+        ProductoCategoriaModel seguridad = productoCategoriaDao.obtenerPorNombre("Seguridad");
 
         // Lista de productos con detalles realistas (sin imágenes por ahora)
         Object[][] productosData = {
