@@ -39,6 +39,8 @@ public class ProductoDao {
             producto.setNombre(productoActualizado.getNombre());
             producto.setDescripcion(productoActualizado.getDescripcion());
             producto.setStock(productoActualizado.getStock());
+            producto.setPrecio_unitario(productoActualizado.getPrecio_unitario());
+            producto.setImgUrl(productoActualizado.getImgUrl());
             return productoRepository.save(producto);
         }).orElse(null);
     }

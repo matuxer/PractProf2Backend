@@ -36,6 +36,8 @@ public class ProductoModel {
     @Column(name = "precio_unitario")
     private Float precio_unitario;
 
+    @Column(name = "img_url")
+    private String imgUrl;
 
     // Relación uno a muchos
     @OneToMany(mappedBy = "producto")
@@ -87,6 +89,14 @@ public class ProductoModel {
 
     public void setPrecio_unitario(Float precio_unitario) {
         this.precio_unitario = precio_unitario;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public List<ItemModel> getItems() {
