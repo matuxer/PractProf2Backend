@@ -22,6 +22,10 @@ public class ProductoCategoriaDao {
         return productoCategoriaRepository.findById(id).orElse(null);
     }
 
+    public ProductoCategoriaModel obtenerPorNombre(String nombre) {
+        return productoCategoriaRepository.findByNombre(nombre).orElse(null);
+    }
+
     public ProductoCategoriaModel crear(ProductoCategoriaModel productoCategoria) {
         return productoCategoriaRepository.save(productoCategoria);
     }
