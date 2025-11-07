@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ferreteria.dao.ProductoDao;
@@ -23,8 +24,13 @@ public class ProductoController {
     private ProductoDao productoDao;
 
     @GetMapping
-    public List<ProductoModel> getAll() {
-        return productoDao.obtenerTodo();
+    public List<ProductoModel> getAll(
+            @RequestParam(required = false) String categoria,
+            @RequestParam(required = false) Float min,
+            @RequestParam(required = false) Float max,
+            @RequestParam(required = false) Boolean stock,
+            @RequestParam(required = false) String nombre) {
+        return productoDao.buscarConFiltros(categoria, min, max, stock, nombre);
     }
 
     @GetMapping("/{id}")
