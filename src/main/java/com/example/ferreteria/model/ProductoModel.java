@@ -1,16 +1,19 @@
 package com.example.ferreteria.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.OneToMany;
-import java.util.ArrayList;
-import java.util.List;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 
 // Modelo de datos para el producto
@@ -41,12 +44,14 @@ public class ProductoModel {
 
     // Relación uno a muchos
     @OneToMany(mappedBy = "producto")
+    @JsonBackReference
     private List<ItemModel> items = new ArrayList<>();
 
 
     // Relación con la tabla producto_categorias
     @ManyToOne
     @JoinColumn(name = "id_categoria") // nombre de la FK en la tabla productos
+    @JsonBackReference
     private ProductoCategoriaModel categoria;
 
 
