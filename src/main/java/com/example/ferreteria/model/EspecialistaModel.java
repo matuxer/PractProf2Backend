@@ -22,7 +22,7 @@ public class EspecialistaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true)
-    private int id;
+    private Long id;
 
     @Column(name = "nombre", length = 50)
     private String nombre;
@@ -72,11 +72,11 @@ public class EspecialistaModel {
     }
 
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
