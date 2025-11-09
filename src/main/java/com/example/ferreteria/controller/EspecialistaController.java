@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ferreteria.dao.EspecialistaDao;
 import com.example.ferreteria.model.EspecialistaModel;
+import com.example.ferreteria.model.OficioModel;
 
 @RestController
 @RequestMapping("/especialistas")
@@ -24,8 +26,12 @@ public class EspecialistaController {
 
     // GET para obtener todos los registros
     @GetMapping
-    public List<EspecialistaModel> getAll() {
-        return especialistaDao.obtenerTodo();
+    public List<EspecialistaModel> getAll(
+            @RequestParam(required = false) OficioModel oficio,
+            @RequestParam(required = false) boolean diponibilidad,
+            @RequestParam(required = false) int puntuacion,
+            @RequestParam(required = false) String nombre) {
+        return especialistaDao.buscarConFiltros(oficio, diponibilidad, puntuacion, nombre);
     }
 
     // GET para obtener un registro por ID
