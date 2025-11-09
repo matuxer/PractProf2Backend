@@ -42,7 +42,7 @@ public class ProductoSeeder {
             // Nombre, Descripción, Stock, Precio, Categoría, Imagen
             // Herramientas Manuales
             {"Martillo Carpintero 16oz", "Martillo de carpintero con mango de fibra de vidrio, cabeza forjada", 50, 15.99f, herramientasManuales, "Martillo_Carpintero_16oz.png"},
-            {"Destornillador Phillips #2", "Destornillador Phillips punta #2, mango ergonómico antideslizante", 100, 8.50f, herramientasManuales, "Destornillador_Phillips_#2.png"},
+            {"Destornillador Phillips #2", "Destornillador Phillips punta #2, mango ergonómico antideslizante", 100, 8.50f, herramientasManuales, "Destornillador_Phillips_N2.png"},
             {"Alicate Universal 8\"", "Alicate universal 8 pulgadas, acero templado, mango aislado", 75, 22.75f, herramientasManuales, "Alicate_Universal_8_pulgadas.png"},
             {"Llave Inglesa 10\"", "Llave inglesa ajustable 10 pulgadas, acero al carbono", 60, 18.90f, herramientasManuales, "Llave_Inglesa_10_pulgadas.png"},
             {"Sierra de Costilla 14\"", "Sierra de costilla 14 pulgadas, dientes templados, mango de madera", 40, 28.50f, herramientasManuales, "Sierra_de_Costilla_14_pulgadas.png"},
