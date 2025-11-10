@@ -3,7 +3,7 @@ package com.example.ferreteria.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -33,7 +33,7 @@ public class EspecialistaModel {
     // Relación con oficios
     @ManyToOne
     @JoinColumn(name = "id_oficio")
-    @JsonBackReference
+    @JsonIgnoreProperties("especialistas") // Ignora la lista de especialistas dentro de oficio para evitar bucle
     private OficioModel oficio;
 
     @Column(name = "disponibilidad")
@@ -46,9 +46,11 @@ public class EspecialistaModel {
     private String perfilImgUrl;
 
     @OneToMany(mappedBy = "especialista")
+    @JsonIgnoreProperties("especialista") // Ignora especialista dentro de feedback para evitar bucle
     private List<FeedbackModel> feedbacksRecibidos = new ArrayList<>();
   
     @OneToMany(mappedBy = "especialista")
+    @JsonIgnoreProperties("especialista") // Ignora especialista dentro de servicio para evitar bucle
     private List<ServicioModel> servicios = new ArrayList<>();
 
     public EspecialistaModel() {}

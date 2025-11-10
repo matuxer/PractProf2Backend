@@ -28,10 +28,10 @@ public class EspecialistaController {
     @GetMapping
     public List<EspecialistaModel> getAll(
             @RequestParam(required = false) OficioModel oficio,
-            @RequestParam(required = false) boolean diponibilidad,
-            @RequestParam(required = false) int puntuacion,
+            @RequestParam(required = false) Boolean disponibilidad,
+            @RequestParam(required = false) Integer puntuacion,
             @RequestParam(required = false) String nombre) {
-        return especialistaDao.buscarConFiltros(oficio, diponibilidad, puntuacion, nombre);
+        return especialistaDao.buscarConFiltros(oficio, disponibilidad, puntuacion, nombre);
     }
 
     // GET para obtener un registro por ID

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -51,7 +52,7 @@ public class ProductoModel {
     // Relación con la tabla producto_categorias
     @ManyToOne
     @JoinColumn(name = "id_categoria") // nombre de la FK en la tabla productos
-    @JsonBackReference
+    @JsonIgnoreProperties("productos") // Ignora la lista de productos dentro de categoria para evitar bucle
     private ProductoCategoriaModel categoria;
 
 
