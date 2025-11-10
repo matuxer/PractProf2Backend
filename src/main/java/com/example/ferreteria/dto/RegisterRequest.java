@@ -7,14 +7,25 @@ public class RegisterRequest {
     private String password;
     private String telefono;
     private String domicilio;
+    
+    // Puede venir el ID o el nombre del país
     private Long idPais;
+    private String nombrePais;
+    
+    // Puede venir el ID o el nombre de la provincia
     private Long idProvincia;
+    private String nombreProvincia;
+    
+    // Puede venir el ID o el nombre de la localidad
     private Long idLocalidad;
+    private String nombreLocalidad;
 
     public RegisterRequest() {
     }
 
-    public RegisterRequest(String nombre, String apellido, String correo, String password, String telefono, String domicilio, Long idPais, Long idProvincia, Long idLocalidad) {
+    public RegisterRequest(String nombre, String apellido, String correo, String password, String telefono, 
+                          String domicilio, Long idPais, String nombrePais, Long idProvincia, 
+                          String nombreProvincia, Long idLocalidad, String nombreLocalidad) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
@@ -22,8 +33,11 @@ public class RegisterRequest {
         this.telefono = telefono;
         this.domicilio = domicilio;
         this.idPais = idPais;
+        this.nombrePais = nombrePais;
         this.idProvincia = idProvincia;
+        this.nombreProvincia = nombreProvincia;
         this.idLocalidad = idLocalidad;
+        this.nombreLocalidad = nombreLocalidad;
     }
 
     public String getNombre() {
@@ -96,5 +110,29 @@ public class RegisterRequest {
 
     public void setIdLocalidad(Long idLocalidad) {
         this.idLocalidad = idLocalidad;
+    }
+
+    public String getNombrePais() {
+        return nombrePais;
+    }
+
+    public void setNombrePais(String nombrePais) {
+        this.nombrePais = nombrePais;
+    }
+
+    public String getNombreProvincia() {
+        return nombreProvincia;
+    }
+
+    public void setNombreProvincia(String nombreProvincia) {
+        this.nombreProvincia = nombreProvincia;
+    }
+
+    public String getNombreLocalidad() {
+        return nombreLocalidad;
+    }
+
+    public void setNombreLocalidad(String nombreLocalidad) {
+        this.nombreLocalidad = nombreLocalidad;
     }
 }

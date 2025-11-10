@@ -43,26 +43,42 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request) {
         try {
-            // Buscar país, provincia y localidad
+            // Obtener o crear país
             PaisModel pais = null;
-            ProvinciaModel provincia = null;
-            LocalidadModel localidad = null;
-
             if (request.getIdPais() != null) {
                 pais = paisDao.obtenerPorId(request.getIdPais());
                 if (pais == null) {
-                    throw new RuntimeException("País no encontrado");
+                    throw new RuntimeException("País con ID " + request.getIdPais() + " no encontrado");
                 }
+            } else if (request.getNombrePais() != null && !request.getNombrePais().trim().isEmpty()) {
+                // Crear nuevo país si no existe
+                PaisModel nuevoPais = new PaisModel();
+                nuevoPais.setNombre(request.getNombrePais().trim());
+                pais = paisDao.crear(nuevoPais);
             }
 
+            // Obtener o crear provincia
+            ProvinciaModel provincia = null;
             if (request.getIdProvincia() != null) {
                 provincia = provinciaDao.obtenerPorId(request.getIdProvincia())
-                    .orElseThrow(() -> new RuntimeException("Provincia no encontrada"));
+                    .orElseThrow(() -> new RuntimeException("Provincia con ID " + request.getIdProvincia() + " no encontrada"));
+            } else if (request.getNombreProvincia() != null && !request.getNombreProvincia().trim().isEmpty()) {
+                // Crear nueva provincia si no existe
+                ProvinciaModel nuevaProvincia = new ProvinciaModel();
+                nuevaProvincia.setNombre(request.getNombreProvincia().trim());
+                provincia = provinciaDao.crear(nuevaProvincia);
             }
 
+            // Obtener o crear localidad
+            LocalidadModel localidad = null;
             if (request.getIdLocalidad() != null) {
                 localidad = localidadDao.obtenerPorId(request.getIdLocalidad())
-                    .orElseThrow(() -> new RuntimeException("Localidad no encontrada"));
+                    .orElseThrow(() -> new RuntimeException("Localidad con ID " + request.getIdLocalidad() + " no encontrada"));
+            } else if (request.getNombreLocalidad() != null && !request.getNombreLocalidad().trim().isEmpty()) {
+                // Crear nueva localidad si no existe
+                LocalidadModel nuevaLocalidad = new LocalidadModel();
+                nuevaLocalidad.setNombre(request.getNombreLocalidad().trim());
+                localidad = localidadDao.crear(nuevaLocalidad);
             }
 
             // Crear el modelo de cliente
