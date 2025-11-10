@@ -1,8 +1,17 @@
 package com.example.ferreteria.model;
 
-import jakarta.persistence.*;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name="clientes")
@@ -18,10 +27,10 @@ public class ClienteModel {
     @Column(name="apellido", length = 50)
     private String apellido;
 
-    @Column(name="correo", length = 50)
+    @Column(name="correo", length = 100, unique = true, nullable = false)
     private String correo;
 
-    @Column(name="password", length = 50)
+    @Column(name="password", length = 255, nullable = false)
     private String password;
 
     @Column(name = "telefono", length = 50)
