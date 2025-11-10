@@ -30,7 +30,8 @@ public class EspecialistaDao {
      * @param oficio Oficio del especialista
      * @param disponibilidad Si es true, trae especialistas disponibles. Si es false, no disponibles
      * @param puntuacion Puntuación mínima del especialista (1-5)
-     * @param nombre Búsqueda parcial por nombre - case insensitive
+     * @param nombre Búsqueda parcial por nombre, apellido o nombre completo - case insensitive
+     *               Ejemplos: "car" encuentra "Carlos", "car gon" encuentra "Carlos González"
      * @return Lista de especialistas que cumplen todos los filtros aplicados
      */
     public List<EspecialistaModel> buscarConFiltros(OficioModel oficio, Boolean disponibilidad, Integer puntuacion, String nombre) {
@@ -56,12 +57,38 @@ public class EspecialistaDao {
                 predicates.add(criteriaBuilder.equal(root.get("disponibilidad"), disponibilidad));
             }
 
-            // Filtro por nombre con búsqueda parcial: WHERE LOWER(nombre) LIKE '%nombre%'
+            // Filtro por nombre, apellido o nombre completo
+            // Busca en: nombre solo, apellido solo, o "nombre apellido" concatenado
+            // Ejemplos: "car" → Carlos, Carmen, Ricardo; "gon" → González; "carlos gon" → Carlos González
             if (nombre != null && !nombre.isEmpty()) {
-                predicates.add(criteriaBuilder.like(
+                String searchTerm = "%" + nombre.toLowerCase() + "%";
+                
+                // Concatena nombre + espacio + apellido para buscar nombre completo
+                // Ejemplo: LOWER(CONCAT(nombre, ' ', apellido)) LIKE '%carlos gon%'
+                Predicate nombreCompleto = criteriaBuilder.like(
+                    criteriaBuilder.lower(
+                        criteriaBuilder.concat(
+                            criteriaBuilder.concat(root.get("nombre"), " "),
+                            root.get("apellido")
+                        )
+                    ),
+                    searchTerm
+                );
+                
+                // Busca solo en nombre: LOWER(nombre) LIKE '%car%'
+                Predicate soloNombre = criteriaBuilder.like(
                     criteriaBuilder.lower(root.get("nombre")),
-                    "%" + nombre.toLowerCase() + "%"
-                ));
+                    searchTerm
+                );
+                
+                // Busca solo en apellido: LOWER(apellido) LIKE '%gon%'
+                Predicate soloApellido = criteriaBuilder.like(
+                    criteriaBuilder.lower(root.get("apellido")),
+                    searchTerm
+                );
+                
+                // Combina las tres condiciones con OR: (nombre LIKE '%x%' OR apellido LIKE '%x%' OR nombre_completo LIKE '%x%')
+                predicates.add(criteriaBuilder.or(soloNombre, soloApellido, nombreCompleto));
             }
 
             // Combina todos los predicados con AND
