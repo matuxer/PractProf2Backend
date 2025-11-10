@@ -8,10 +8,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.ferreteria.dao.LocalidadDao;
+import com.example.ferreteria.dao.PaisDao;
+import com.example.ferreteria.dao.ProvinciaDao;
 import com.example.ferreteria.dto.AuthResponse;
 import com.example.ferreteria.dto.LoginRequest;
 import com.example.ferreteria.dto.RegisterRequest;
 import com.example.ferreteria.model.ClienteModel;
+import com.example.ferreteria.model.LocalidadModel;
+import com.example.ferreteria.model.PaisModel;
+import com.example.ferreteria.model.ProvinciaModel;
 import com.example.ferreteria.service.AuthService;
 
 @RestController
@@ -21,6 +27,15 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
+    @Autowired
+    private PaisDao paisDao;
+
+    @Autowired
+    private ProvinciaDao provinciaDao;
+
+    @Autowired
+    private LocalidadDao localidadDao;
+
     /**
      * Endpoint para registrar un nuevo cliente
      * POST /auth/register
@@ -28,6 +43,28 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request) {
         try {
+            // Buscar país, provincia y localidad
+            PaisModel pais = null;
+            ProvinciaModel provincia = null;
+            LocalidadModel localidad = null;
+
+            if (request.getIdPais() != null) {
+                pais = paisDao.obtenerPorId(request.getIdPais());
+                if (pais == null) {
+                    throw new RuntimeException("País no encontrado");
+                }
+            }
+
+            if (request.getIdProvincia() != null) {
+                provincia = provinciaDao.obtenerPorId(request.getIdProvincia())
+                    .orElseThrow(() -> new RuntimeException("Provincia no encontrada"));
+            }
+
+            if (request.getIdLocalidad() != null) {
+                localidad = localidadDao.obtenerPorId(request.getIdLocalidad())
+                    .orElseThrow(() -> new RuntimeException("Localidad no encontrada"));
+            }
+
             // Crear el modelo de cliente
             ClienteModel cliente = new ClienteModel();
             cliente.setNombre(request.getNombre());
@@ -36,6 +73,9 @@ public class AuthController {
             cliente.setContraseña(request.getPassword());
             cliente.setTelefono(request.getTelefono());
             cliente.setDomicilio(request.getDomicilio());
+            cliente.setPais(pais);
+            cliente.setProvincia(provincia);
+            cliente.setLocalidad(localidad);
 
             // Registrar el cliente (la contraseña se encripta automáticamente)
             ClienteModel clienteRegistrado = authService.registrar(cliente);

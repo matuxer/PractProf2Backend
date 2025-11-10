@@ -7,17 +7,23 @@ public class RegisterRequest {
     private String password;
     private String telefono;
     private String domicilio;
+    private Long idPais;
+    private Long idProvincia;
+    private Long idLocalidad;
 
     public RegisterRequest() {
     }
 
-    public RegisterRequest(String nombre, String apellido, String correo, String password, String telefono, String domicilio) {
+    public RegisterRequest(String nombre, String apellido, String correo, String password, String telefono, String domicilio, Long idPais, Long idProvincia, Long idLocalidad) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
         this.password = password;
         this.telefono = telefono;
         this.domicilio = domicilio;
+        this.idPais = idPais;
+        this.idProvincia = idProvincia;
+        this.idLocalidad = idLocalidad;
     }
 
     public String getNombre() {
@@ -66,5 +72,29 @@ public class RegisterRequest {
 
     public void setDomicilio(String domicilio) {
         this.domicilio = domicilio;
+    }
+
+    public Long getIdPais() {
+        return idPais;
+    }
+
+    public void setIdPais(Long idPais) {
+        this.idPais = idPais;
+    }
+
+    public Long getIdProvincia() {
+        return idProvincia;
+    }
+
+    public void setIdProvincia(Long idProvincia) {
+        this.idProvincia = idProvincia;
+    }
+
+    public Long getIdLocalidad() {
+        return idLocalidad;
+    }
+
+    public void setIdLocalidad(Long idLocalidad) {
+        this.idLocalidad = idLocalidad;
     }
 }
