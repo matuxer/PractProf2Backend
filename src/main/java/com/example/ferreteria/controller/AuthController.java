@@ -43,6 +43,9 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request) {
         try {
+            // Validar que no vengan ID y nombre al mismo tiempo
+            request.validar();
+
             // Obtener o crear país
             PaisModel pais = null;
             if (request.getIdPais() != null) {

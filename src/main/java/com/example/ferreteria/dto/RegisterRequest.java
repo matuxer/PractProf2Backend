@@ -135,4 +135,24 @@ public class RegisterRequest {
     public void setNombreLocalidad(String nombreLocalidad) {
         this.nombreLocalidad = nombreLocalidad;
     }
+
+    /**
+     * Valida que solo venga ID o nombre, no ambos para cada campo geográfico
+     */
+    public void validar() {
+        // Validar país
+        if (idPais != null && nombrePais != null && !nombrePais.trim().isEmpty()) {
+            throw new IllegalArgumentException("Debe proporcionar idPais O nombrePais, no ambos");
+        }
+
+        // Validar provincia
+        if (idProvincia != null && nombreProvincia != null && !nombreProvincia.trim().isEmpty()) {
+            throw new IllegalArgumentException("Debe proporcionar idProvincia O nombreProvincia, no ambos");
+        }
+
+        // Validar localidad
+        if (idLocalidad != null && nombreLocalidad != null && !nombreLocalidad.trim().isEmpty()) {
+            throw new IllegalArgumentException("Debe proporcionar idLocalidad O nombreLocalidad, no ambos");
+        }
+    }
 }
