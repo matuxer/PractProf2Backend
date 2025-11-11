@@ -1,6 +1,7 @@
 package com.example.ferreteria.model;
 
 import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -26,6 +27,7 @@ public class FeedbackModel {
     @JoinColumn(name = "id_especialista")
     private EspecialistaModel especialista;
   
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_cliente")
     private ClienteModel cliente;
