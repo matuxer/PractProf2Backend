@@ -33,6 +33,12 @@ public class DataSeederRunner implements CommandLineRunner {
     @Autowired
     private OficioSeeder oficioSeeder;
 
+    @Autowired
+    private ClienteSeeder clienteSeeder;
+
+    @Autowired
+    private FeedbackSeeder feedbackSeeder;
+
     @Override
     public void run(String... args) throws Exception {
         System.out.println("\n🌱 ===== INICIANDO PROCESO DE SEEDERS =====");
@@ -52,6 +58,10 @@ public class DataSeederRunner implements CommandLineRunner {
             productoSeeder.seed();
             oficioSeeder.seed();
             especialistaSeeder.seed();
+            
+            // Clientes y feedbacks (después de tener especialistas)
+            clienteSeeder.seed();
+            feedbackSeeder.seed();
             
             System.out.println("✅ ===== SEEDERS COMPLETADOS EXITOSAMENTE =====\n");
             
