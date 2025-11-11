@@ -1,9 +1,11 @@
 package com.example.ferreteria.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,6 +30,9 @@ public class CompraModel {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "fecha_compra")
+    private LocalDate fechaCompra;
+
     @Column(name = "descuento")
     private float descuento;
 
@@ -46,8 +51,9 @@ public class CompraModel {
     public CompraModel() {
     }
 
-    public CompraModel(Long id, float descuento, float total, ClienteModel cliente) {
+    public CompraModel(Long id, LocalDate fechaCompra, float descuento, float total, ClienteModel cliente) {
         this.id = id;
+        this.fechaCompra = fechaCompra;
         this.descuento = descuento;
         this.total = total;
         this.cliente = cliente;
@@ -59,6 +65,14 @@ public class CompraModel {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public LocalDate getFechaCompra() {
+        return fechaCompra;
+    }
+
+    public void setFechaCompra(LocalDate fechaCompra) {
+        this.fechaCompra = fechaCompra;
     }
 
     public float getDescuento() {

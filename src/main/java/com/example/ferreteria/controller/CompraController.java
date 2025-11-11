@@ -1,5 +1,6 @@
 package com.example.ferreteria.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -94,6 +95,7 @@ public class CompraController {
             compra.setCliente(cliente);
             compra.setDescuento(request.getDescuento());
             compra.setTotal(0); // Se calculará después
+            compra.setFechaCompra(LocalDate.now()); // Fecha actual
             
             // Guardar la compra primero para obtener el ID
             compra = compraDao.crear(compra);
