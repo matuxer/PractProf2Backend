@@ -27,7 +27,7 @@ public class EspecialistaController {
     // GET para obtener todos los registros
     @GetMapping
     public List<EspecialistaModel> getAll(
-            @RequestParam(required = false) OficioModel oficio,
+            @RequestParam(required = false) String oficio,
             @RequestParam(required = false) Boolean disponibilidad,
             @RequestParam(required = false) Integer puntuacion,
             @RequestParam(required = false) String nombre) {

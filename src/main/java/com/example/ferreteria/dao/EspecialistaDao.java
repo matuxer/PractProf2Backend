@@ -9,7 +9,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
 import com.example.ferreteria.model.EspecialistaModel;
-import com.example.ferreteria.model.OficioModel;
 import com.example.ferreteria.repository.EspecialistaRepository;
 
 import jakarta.persistence.criteria.Predicate;
@@ -27,23 +26,23 @@ public class EspecialistaDao {
  
     /** 
      * Busca especialistas aplicando filtros dinámicos
-     * @param oficio Oficio del especialista
+     * @param nombreOficio Nombre del oficio del especialista
      * @param disponibilidad Si es true, trae especialistas disponibles. Si es false, no disponibles
      * @param puntuacion Puntuación mínima del especialista (1-5)
      * @param nombre Búsqueda parcial por nombre, apellido o nombre completo - case insensitive
      *               Ejemplos: "car" encuentra "Carlos", "car gon" encuentra "Carlos González"
      * @return Lista de especialistas que cumplen todos los filtros aplicados
      */
-    public List<EspecialistaModel> buscarConFiltros(OficioModel oficio, Boolean disponibilidad, Integer puntuacion, String nombre) {
+    public List<EspecialistaModel> buscarConFiltros(String nombreOficio, Boolean disponibilidad, Integer puntuacion, String nombre) {
 
         Specification<EspecialistaModel> spec = (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
             // Filtro por oficio
-            if (oficio != null && oficio.getNombre() != null && !oficio.getNombre().isEmpty()) {
+            if (nombreOficio != null && !nombreOficio.isEmpty()) {
                 predicates.add(criteriaBuilder.equal(
                     criteriaBuilder.lower(root.get("oficio").get("nombre")), 
-                    oficio.getNombre().toLowerCase()
+                    nombreOficio.toLowerCase()
                 ));
             }
 
