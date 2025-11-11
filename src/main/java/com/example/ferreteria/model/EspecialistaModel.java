@@ -46,7 +46,6 @@ public class EspecialistaModel {
     private String perfilImgUrl;
 
     @OneToMany(mappedBy = "especialista")
-    @JsonIgnoreProperties("especialista") // Ignora especialista dentro de feedback para evitar bucle
     private List<FeedbackModel> feedbacksRecibidos = new ArrayList<>();
   
     @OneToMany(mappedBy = "especialista")
