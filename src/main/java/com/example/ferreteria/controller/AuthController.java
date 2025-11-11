@@ -19,6 +19,7 @@ import com.example.ferreteria.model.LocalidadModel;
 import com.example.ferreteria.model.PaisModel;
 import com.example.ferreteria.model.ProvinciaModel;
 import com.example.ferreteria.service.AuthService;
+import com.example.ferreteria.service.JwtService;
 
 @RestController
 @RequestMapping("/auth")
@@ -26,6 +27,9 @@ public class AuthController {
 
     @Autowired
     private AuthService authService;
+
+    @Autowired
+    private JwtService jwtService;
 
     @Autowired
     private PaisDao paisDao;
@@ -99,14 +103,17 @@ public class AuthController {
             // Registrar el cliente (la contraseña se encripta automáticamente)
             ClienteModel clienteRegistrado = authService.registrar(cliente);
 
+            // Generar token JWT
+            String token = jwtService.generateToken(clienteRegistrado.getId(), clienteRegistrado.getCorreo());
+
             // No devolver la contraseña en la respuesta
             clienteRegistrado.setContraseña(null);
 
-            AuthResponse response = new AuthResponse("Cliente registrado exitosamente", clienteRegistrado);
+            AuthResponse response = new AuthResponse("Cliente registrado exitosamente", clienteRegistrado, token);
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
 
         } catch (RuntimeException e) {
-            AuthResponse response = new AuthResponse(e.getMessage(), null);
+            AuthResponse response = new AuthResponse(e.getMessage(), null, null);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
     }
@@ -119,14 +126,17 @@ public class AuthController {
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
         return authService.login(request.getCorreo(), request.getPassword())
             .map(cliente -> {
+                // Generar token JWT
+                String token = jwtService.generateToken(cliente.getId(), cliente.getCorreo());
+                
                 // No devolver la contraseña en la respuesta
                 cliente.setContraseña(null);
                 
-                AuthResponse response = new AuthResponse("Login exitoso", cliente);
+                AuthResponse response = new AuthResponse("Login exitoso", cliente, token);
                 return ResponseEntity.ok(response);
             })
             .orElseGet(() -> {
-                AuthResponse response = new AuthResponse("Credenciales inválidas", null);
+                AuthResponse response = new AuthResponse("Credenciales inválidas", null, null);
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
             });
     }
