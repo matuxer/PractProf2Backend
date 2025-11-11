@@ -3,6 +3,7 @@ package com.example.ferreteria.controller;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -136,7 +137,13 @@ public class CompraController {
             compra.setTotal(subtotal - request.getDescuento());
             compra = compraDao.actualizar(compra.getId(), compra);
 
-            // 5. Retornar la compra creada
+            // 5. Agregar puntos aleatorios al cliente (1-5 puntos)
+            Random random = new Random();
+            int puntosGanados = random.nextInt(5) + 1; // Genera número entre 1 y 5
+            cliente.setPuntosRecompensa(cliente.getPuntosRecompensa() + puntosGanados);
+            clienteDao.actualizar(cliente.getId(), cliente);
+
+            // 6. Retornar la compra creada
             return ResponseEntity.ok(compra);
 
         } catch (Exception e) {
