@@ -3,7 +3,7 @@ package com.example.ferreteria.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -33,7 +33,7 @@ public class OficioModel {
 
     // Relación con especialistas
     @OneToMany(mappedBy = "oficio")
-    @JsonManagedReference
+    @JsonIgnore
     private List<EspecialistaModel> especialistas = new ArrayList<>();
 
     // Constructores
