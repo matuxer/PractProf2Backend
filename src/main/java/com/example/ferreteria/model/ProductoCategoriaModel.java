@@ -3,7 +3,7 @@ package com.example.ferreteria.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,7 +26,7 @@ public class ProductoCategoriaModel {
 
     // Relación con la tabla productos
     @OneToMany(mappedBy = "categoria")
-    @JsonManagedReference
+    @JsonIgnore
     private List<ProductoModel> productos = new ArrayList<>();
 
     //Getters y Setters
