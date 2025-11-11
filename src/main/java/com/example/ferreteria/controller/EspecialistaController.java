@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ferreteria.dao.EspecialistaDao;
 import com.example.ferreteria.model.EspecialistaModel;
-import com.example.ferreteria.model.OficioModel;
 
 @RestController
 @RequestMapping("/especialistas")
