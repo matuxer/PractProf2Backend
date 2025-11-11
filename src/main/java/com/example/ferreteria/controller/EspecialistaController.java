@@ -1,0 +1,106 @@
+package com.example.ferreteria.controller;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.ferreteria.dao.EspecialistaDao;
+import com.example.ferreteria.dto.EspecialistaConFeedbacksResponse;
+import com.example.ferreteria.dto.FeedbackResponse;
+import com.example.ferreteria.model.EspecialistaModel;
+
+@RestController
+@RequestMapping("/especialistas")
+public class EspecialistaController {
+
+    @Autowired
+    private EspecialistaDao especialistaDao;
+
+    // GET para obtener todos los registros
+    @GetMapping
+    public List<EspecialistaModel> getAll(
+            @RequestParam(required = false) String oficio,
+            @RequestParam(required = false) Boolean disponibilidad,
+            @RequestParam(required = false) Integer puntuacion,
+            @RequestParam(required = false) String nombre) {
+        return especialistaDao.buscarConFiltros(oficio, disponibilidad, puntuacion, nombre);
+    }
+
+    // GET para obtener un registro por ID
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable Long id) {
+        EspecialistaModel especialista = especialistaDao.obtenerPorId(id).orElse(null);
+        
+        if (especialista == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // Convertir feedbacks a DTO
+        List<FeedbackResponse> feedbacks = especialista.getFeedbacksRecibidos().stream()
+            .map(feedback -> {
+                FeedbackResponse.ClienteBasicInfo clienteInfo = null;
+                if (feedback.getCliente() != null) {
+                    clienteInfo = new FeedbackResponse.ClienteBasicInfo(
+                        feedback.getCliente().getId(),
+                        feedback.getCliente().getNombre(),
+                        feedback.getCliente().getApellido()
+                    );
+                }
+                return new FeedbackResponse(
+                    feedback.getId(),
+                    feedback.getFecha(),
+                    feedback.getClasificacion(),
+                    feedback.getComentario(),
+                    clienteInfo
+                );
+            })
+            .collect(Collectors.toList());
+
+        // Crear respuesta con feedbacks
+        EspecialistaConFeedbacksResponse response = new EspecialistaConFeedbacksResponse(
+            especialista.getId(),
+            especialista.getNombre(),
+            especialista.getApellido(),
+            especialista.getOficio() != null ? especialista.getOficio().getNombre() : null,
+            especialista.isDisponibilidad(),
+            especialista.getPuntuacion(),
+            especialista.getPerfilImgUrl(),
+            feedbacks
+        );
+
+        return ResponseEntity.ok(response);
+    }
+
+    // POST para crear un nuevo registro
+    @PostMapping
+    public EspecialistaModel create(@RequestBody EspecialistaModel especialista) {
+        return especialistaDao.crear(especialista);
+    }
+
+    // PUT para actualizar un registro existente
+    @PutMapping("/{id}")
+    public EspecialistaModel update(@PathVariable Long id, @RequestBody EspecialistaModel especialistaActualizado) {
+        return especialistaDao.actualizar(id, especialistaActualizado);
+    }
+
+    // DELETE para eliminar un registro por ID
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable Long id) {
+        if (especialistaDao.eliminar(id)) {
+            return "Especialista con ID " + id + " eliminado correctamente.";
+        } else {
+            return "Especialista con ID " + id + " no encontrado.";
+        }
+    }
+}
